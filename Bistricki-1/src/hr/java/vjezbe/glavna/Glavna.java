@@ -8,6 +8,7 @@ import hr.java.vjezbe.entitet.Student;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Glavna {
@@ -38,17 +39,13 @@ public class Glavna {
 
 		for (int i = 0; i < predmeti.length; i++) {
 			System.out.printf("Unesite podatke za %d. predmet:%n", i + 1);
-			Profesor nositelj = odaberiProfesora(scanner, profesori);
-			Predmet predmet = nextPredmet(scanner, nositelj, studenti);
+			Predmet predmet = nextPredmet(scanner, profesori, studenti);
 			predmeti[i] = predmet;
 		}
 
 		for (int i = 0; i < ispiti.length; i++) {
 			System.out.printf("Unesite podatke za %d. ispit:%n", i + 1);
-			Predmet predmet = odaberiPredmet(scanner, predmeti);
-			Student student = odaberiStudenta(scanner, studenti);
-
-			Ispit ispit = nextIspit(scanner, predmet, student);
+			Ispit ispit = nextIspit(scanner, predmeti);
 			ispiti[i] = ispit;
 		}
 
@@ -56,7 +53,7 @@ public class Glavna {
 		int n = 0;
 		for (Ispit ispit : ispiti) {
 			if (ispit.getOcjena() == 5) {
-				System.out.printf("%s %s%n", ispit.getStudent().getIme(), ispit.getStudent().getPrezime());
+				System.out.printf("%s %s, %s%n", ispit.getStudent().getIme(), ispit.getStudent().getPrezime(), ispit.getPredmet().getNaziv());
 				n++;
 			}
 		}
@@ -69,57 +66,63 @@ public class Glavna {
 	}
 
 	static Profesor nextProfesor(Scanner scanner) {
-		System.out.print("šifra: ");
+		System.out.print("  šifra: ");
 		String sifra = scanner.nextLine();
 
-		System.out.print("ime: ");
+		System.out.print("  ime: ");
 		String ime = scanner.nextLine();
 
-		System.out.print("prezime: ");
+		System.out.print("  prezime: ");
 		String prezime = scanner.nextLine();
 
-		System.out.print("titula: ");
+		System.out.print("  titula: ");
 		String titula = scanner.nextLine();
 
 		return new Profesor(sifra, ime, prezime, titula);
 	}
 
 	static Student nextStudent(Scanner scanner) {
-		System.out.print("ime: ");
+		System.out.print("  ime: ");
 		String ime = scanner.nextLine();
 
-		System.out.print("prezime: ");
+		System.out.print("  prezime: ");
 		String prezime = scanner.nextLine();
 
-		System.out.print("JMBAG: ");
+		System.out.print("  JMBAG: ");
 		String jmbag = scanner.nextLine();
 
-		System.out.print("datum rođenja (dd.MM.yyyy.): ");
+		System.out.print("  datum rođenja (dd.MM.yyyy.): ");
 		LocalDate datumRodjenja = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy."));
 
 		return new Student(ime, prezime, jmbag, datumRodjenja);
 	}
 
-	static Predmet nextPredmet(Scanner scanner, Profesor nositelj, Student[] studenti) {
-		System.out.print("šifra: ");
+	static Predmet nextPredmet(Scanner scanner, Profesor[] profesori, Student[] sviStudenti) {
+		System.out.print("  šifra: ");
 		String sifra = scanner.nextLine();
 
-		System.out.print("naziv: ");
+		System.out.print("  naziv: ");
 		String naziv = scanner.nextLine();
 
-		System.out.print("broj ECTS bodova: ");
+		System.out.print("  broj ECTS bodova: ");
 		int brojEctsBodova = scanner.nextInt();
 		scanner.nextLine();
 
-		return new Predmet(sifra, naziv, brojEctsBodova, nositelj, studenti);
+		Profesor nositelj = odaberiProfesora(scanner, profesori);
+		Student[] upisaniStudenti = odaberiUpisaneStudente(scanner, sviStudenti);
+
+		return new Predmet(sifra, naziv, brojEctsBodova, nositelj, upisaniStudenti);
 	}
 
-	static Ispit nextIspit(Scanner scanner, Predmet predmet, Student student) {
-		System.out.print("ocjena (1-5): ");
+	static Ispit nextIspit(Scanner scanner, Predmet[] predmeti) {
+		Predmet predmet = odaberiPredmet(scanner, predmeti);
+		Student student = odaberiStudenta(scanner, predmet.getStudenti());
+
+		System.out.print("  ocjena (1-5): ");
 		int ocjena = scanner.nextInt();
 		scanner.nextLine();
 
-		System.out.print("datum i vrijeme pisanja (dd.MM.yyyy. HH:mm): ");
+		System.out.print("  datum i vrijeme pisanja (dd.MM.yyyy. HH:mm): ");
 		LocalDateTime datumIVrijeme = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
 
 		return new Ispit(predmet, student, ocjena, datumIVrijeme);
@@ -127,10 +130,10 @@ public class Glavna {
 
 	static Profesor odaberiProfesora(Scanner scanner, Profesor[] profesori) {
 		for (int i = 0; i < profesori.length; i++) {
-			System.out.printf("%d. %s %s%n", i + 1, profesori[i].getIme(), profesori[i].getPrezime());
+			System.out.printf("  %d. %s %s%n", i + 1, profesori[i].getIme(), profesori[i].getPrezime());
 		}
 
-		System.out.print("izaberite profesora: ");
+		System.out.print("  izaberite profesora: ");
 		int index = scanner.nextInt() - 1;
 		scanner.nextLine();
 
@@ -139,10 +142,10 @@ public class Glavna {
 
 	static Predmet odaberiPredmet(Scanner scanner, Predmet[] predmeti) {
 		for (int i = 0; i < predmeti.length; i++) {
-			System.out.printf("%d. %s%n", i + 1, predmeti[i].getNaziv());
+			System.out.printf("  %d. %s%n", i + 1, predmeti[i].getNaziv());
 		}
 
-		System.out.print("izaberite predmet: ");
+		System.out.print("  izaberite predmet: ");
 		int index = scanner.nextInt() - 1;
 		scanner.nextLine();
 
@@ -151,13 +154,30 @@ public class Glavna {
 
 	static Student odaberiStudenta(Scanner scanner, Student[] studenti) {
 		for (int i = 0; i < studenti.length; i++) {
-			System.out.printf("%d. %s %s%n", i + 1, studenti[i].getIme(), studenti[i].getPrezime());
+			System.out.printf("  %d. %s %s%n", i + 1, studenti[i].getIme(), studenti[i].getPrezime());
 		}
 
-		System.out.print("izaberite studenta: ");
+		System.out.print("  izaberite studenta: ");
 		int index = scanner.nextInt() - 1;
 		scanner.nextLine();
 
 		return studenti[index];
+	}
+
+	static Student[] odaberiUpisaneStudente(Scanner scanner, Student[] sviStudenti) {
+		for (int i = 0; i < sviStudenti.length; i++) {
+			System.out.printf("  %d. %s %s%n", i + 1, sviStudenti[i].getIme(), sviStudenti[i].getPrezime());
+		}
+
+		System.out.print("  izaberite studente (brojevi razdvojeni razmakom, bez točke): ");
+		int[] indecies = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(s -> Integer.parseInt(s) - 1).toArray();
+		Student[] upisaniStudenti = new Student[indecies.length];
+		int i = 0;
+
+		for (int j = 0; j < indecies.length; j++) {
+			upisaniStudenti[i++] = sviStudenti[j];
+		}
+
+		return upisaniStudenti;
 	}
 }
