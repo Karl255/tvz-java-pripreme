@@ -6,7 +6,7 @@ public class Profesor extends Osoba {
 	private String prezime;
 	private String titula;
 
-	public Profesor(String sifra, String ime, String prezime, String titula) {
+	private Profesor(String sifra, String ime, String prezime, String titula) {
 		super(ime, prezime);
 		this.sifra = sifra;
 		this.titula = titula;
