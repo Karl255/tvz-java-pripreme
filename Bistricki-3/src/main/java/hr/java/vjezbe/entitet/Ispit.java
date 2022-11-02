@@ -2,6 +2,9 @@ package hr.java.vjezbe.entitet;
 
 import java.time.LocalDateTime;
 
+/**
+ * Ispit proveden u tercijarnoj obrazovnoj ustanovi.
+ */
 public final class Ispit implements Online {
 	private Predmet predmet;
 	private Student student;
@@ -59,6 +62,10 @@ public final class Ispit implements Online {
 		return this;
 	}
 
+	/**
+	 * Postavlja naziv online softvera ako se ispit održao online.
+	 * @param nazivOnlineSoftvera Naziv korištenog softvera.
+	 */
 	@Override
 	public void setNazivOnlineSoftvera(String nazivOnlineSoftvera) {
 		this.nazivOnlineSoftvera = nazivOnlineSoftvera;

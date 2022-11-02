@@ -1,5 +1,8 @@
 package hr.java.vjezbe.entitet;
 
+/**
+ * Profesor na tercijarnoj obrazovnoj ustanovi.
+ */
 public class Profesor extends Osoba {
 	private String sifra;
 	private String ime;
@@ -27,7 +30,10 @@ public class Profesor extends Osoba {
 	public void setTitula(String titula) {
 		this.titula = titula;
 	}
-	
+
+	/**
+	 * Klasa za generiranje objekata tipa {@link Profesor}
+	 */
 	public static class ProfesorBuilder {
 		private String sifra;
 		private String ime;
@@ -53,7 +59,11 @@ public class Profesor extends Osoba {
 			this.titula = titula;
 			return this;
 		}
-		
+
+		/**
+		 * Generira objekt tipa {@link Profesor}.
+		 * @return Generiran objekt tipa {@link Profesor}.
+		 */
 		public Profesor build() {
 			return new Profesor(sifra, ime, prezime, titula);
 		}

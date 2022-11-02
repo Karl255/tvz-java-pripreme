@@ -1,5 +1,8 @@
 package hr.java.vjezbe.entitet;
 
+/**
+ * Predmet koji se izvodi u tercijarnoj obrazovnoj ustanovi.
+ */
 public class Predmet {
 	private String sifra;
 	private String naziv;

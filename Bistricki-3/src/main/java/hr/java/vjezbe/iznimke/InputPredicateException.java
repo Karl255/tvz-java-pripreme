@@ -1,5 +1,8 @@
 package hr.java.vjezbe.iznimke;
 
+/**
+ * Iznimka koja se baci kada upis iz komandne linije ne odgovara danom predikatu.
+ */
 public class InputPredicateException extends Exception {
 	public InputPredicateException() { }
 

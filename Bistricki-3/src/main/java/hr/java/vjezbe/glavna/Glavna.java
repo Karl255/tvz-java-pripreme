@@ -11,23 +11,30 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+/**
+ * Glavna klasa s metodom main i pomoćnim metodama.
+ */
 public class Glavna {
-	// TODO: read these at runtime
-	private static final int BROJ_OBRAZOVNIH_USTANOVA = 2;
-	private static final int BROJ_STUDENATA = 2;
-	private static final int BROJ_PROFESORA = 2;
-	private static final int BROJ_PREDMETA = 2;
-	private static final int BROJ_ISPITA = 2;
+	private static final int MIN_OBRAZOVNIH_USTANOVA = 2;
+	private static final int MIN_STUDENATA = 2;
+	private static final int MIN_PROFESORA = 2;
+	private static final int MIN_PREDMETA = 2;
+	private static final int MIN_ISPITA = 2;
 
 	private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 
 	private static final Predicate<Integer> jeLiOcjena = x -> x >= 1 && x <= 5;
 	private static final Function<Integer, Predicate<Integer>> jeLiIspravanIndeksOd1 = count -> (i -> i >= 1 && i <= count);
 
+	/**
+	 * Početak programa.
+	 * @param args Argumenti iz komandne linije.
+	 */
 	public static void main(String[] args) {
-		var obrazovneUstanove = new ObrazovnaUstanova[BROJ_OBRAZOVNIH_USTANOVA];
-
 		var scanner = new Scanner(System.in);
+		System.out.print("Koliko obrazovnih ustanova želite unijeti? (najmanje 2) ");
+		int brojObrazovnihUstanova = SafeScanning.ensureNextInt(scanner, x -> x >= MIN_OBRAZOVNIH_USTANOVA);
+		var obrazovneUstanove = new ObrazovnaUstanova[brojObrazovnihUstanova];
 
 		for (int i = 0; i < obrazovneUstanove.length; i++) {
 			try {
@@ -70,16 +77,20 @@ public class Glavna {
 		scanner.close();
 	}
 
+	/**
+	 * Učitava novu obrazovnu ustanovu preko danog scannera.
+	 * @param scanner Scanner s kojim se čitaju podatci.
+	 * @return Novi objekt s podacima učitanih koristeći dani scanner.
+	 */
 	static ObrazovnaUstanova nextObrazovnaUstanova(Scanner scanner) {
-		var studenti = new Student[BROJ_STUDENATA];
-		var profesori = new Profesor[BROJ_PROFESORA];
-		var predmeti = new Predmet[BROJ_PREDMETA];
-		var ispiti = new Ispit[BROJ_ISPITA];
-
 		System.out.printf("%nOdaberite ustanovu:%n  1. Veleučilište Jave%n  2. Fakultet Računarstva%n");
 		int odabranaObrazovnaUstanova = SafeScanning.ensureNextInt(scanner, jeLiIspravanIndeksOd1.apply(2));
 		System.out.print("Naziv ustanove: ");
 		var naziv = scanner.nextLine();
+
+		System.out.print("Koliko studenata želite unijeti? (najmanje 2) ");
+		int brojStudenata = SafeScanning.ensureNextInt(scanner, x -> x >= MIN_STUDENATA);
+		var studenti = new Student[brojStudenata];
 
 		for (int i = 0; i < studenti.length; i++) {
 			System.out.printf("Unesite podatke za %d. studenta:%n", i + 1);
@@ -87,17 +98,29 @@ public class Glavna {
 			studenti[i] = student;
 		}
 
+		System.out.print("Koliko profesora želite unijeti? (najmanje 2) ");
+		int brojProfesora = SafeScanning.ensureNextInt(scanner, x -> x >= MIN_PROFESORA);
+		var profesori = new Profesor[brojProfesora];
+
 		for (int i = 0; i < profesori.length; i++) {
 			System.out.printf("Unesite podatke za %d. profesora:%n", i + 1);
 			var profesor = nextProfesor(scanner);
 			profesori[i] = profesor;
 		}
 
+		System.out.print("Koliko predmeta želite unijeti? (najmanje 2) ");
+		int brojPredmeta = SafeScanning.ensureNextInt(scanner, x -> x >= MIN_PREDMETA);
+		var predmeti = new Predmet[brojPredmeta];
+
 		for (int i = 0; i < predmeti.length; i++) {
 			System.out.printf("Unesite podatke za %d. predmet:%n", i + 1);
 			var predmet = nextPredmet(scanner, profesori, studenti);
 			predmeti[i] = predmet;
 		}
+
+		System.out.print("Koliko ispita želite unijeti? (najmanje 2) ");
+		int brojIspita = SafeScanning.ensureNextInt(scanner, x -> x >= MIN_ISPITA);
+		var ispiti = new Ispit[brojIspita];
 
 		for (int i = 0; i < ispiti.length; i++) {
 			System.out.printf("Unesite podatke za %d. ispit:%n", i + 1);
@@ -131,6 +154,11 @@ public class Glavna {
 		};
 	}
 
+	/**
+	 * Učitava novog profesora preko danog scannera.
+	 * @param scanner Scanner s kojim se čitaju podatci.
+	 * @return Novi objekt s podacima učitanih koristeći dani scanner.
+	 */
 	static Profesor nextProfesor(Scanner scanner) {
 		var builder = new Profesor.ProfesorBuilder();
 
@@ -149,6 +177,11 @@ public class Glavna {
 		return builder.build();
 	}
 
+	/**
+	 * Učitava novog studenta preko danog scannera.
+	 * @param scanner Scanner s kojim se čitaju podatci.
+	 * @return Novi objekt s podacima učitanih koristeći dani scanner.
+	 */
 	static Student nextStudent(Scanner scanner) {
 		System.out.print("  ime: ");
 		var ime = scanner.nextLine();
@@ -165,6 +198,13 @@ public class Glavna {
 		return new Student(ime, prezime, jmbag, datumRodjenja);
 	}
 
+	/**
+	 * Učitava novi predmet preko danog scannera te danih profesora i studenata.
+	 * @param scanner Scanner s kojim se čitaju podatci.
+	 * @param profesori Popis dostupnih profesora za nositelja predmeta.
+	 * @param sviStudenti Popis dostupnih studenata koji mogu upisati predmet. 
+	 * @return Novi objekt s podacima učitanih koristeći dani scanner.
+	 */
 	static Predmet nextPredmet(Scanner scanner, Profesor[] profesori, Student[] sviStudenti) {
 		System.out.print("  šifra: ");
 		var sifra = scanner.nextLine();
@@ -181,6 +221,12 @@ public class Glavna {
 		return new Predmet(sifra, naziv, brojEctsBodova, nositelj, upisaniStudenti);
 	}
 
+	/**
+	 * Učitava novi ispit preko danog scannera te danih predmeta i njihovih studenata.
+	 * @param scanner Scanner s kojim se čitaju podatci.
+	 * @param predmeti Popis predmeta koji se polažu.
+	 * @return Novi objekt s podacima učitanih koristeći dani scanner.
+	 */
 	static Ispit nextIspit(Scanner scanner, Predmet[] predmeti) {
 		var predmet = odaberiPredmet(scanner, predmeti);
 		var student = odaberiStudenta(scanner, predmet.getStudenti());
@@ -200,6 +246,12 @@ public class Glavna {
 		return new Ispit(predmet, student, ocjena, datumIVrijeme, new Dvorana(dvorana, zgrada));
 	}
 
+	/**
+	 * Pita korisnika za odabir jednog od danih profesora.
+	 * @param scanner Scanner s kojim se čita korisnikov odabir.
+	 * @param profesori Popis profesora koji se mogu odabrati.
+	 * @return Odabran profesor.
+	 */
 	static Profesor odaberiProfesora(Scanner scanner, Profesor[] profesori) {
 		for (int i = 0; i < profesori.length; i++) {
 			System.out.printf("  %d. %s %s%n", i + 1, profesori[i].getIme(), profesori[i].getPrezime());
@@ -211,6 +263,12 @@ public class Glavna {
 		return profesori[index];
 	}
 
+	/**
+	 * Pita korisnika za odabir jednog od danih predmeta.
+	 * @param scanner Scanner s kojim se čita korisnikov odabir.
+	 * @param predmeti Popis predmeta koji se mogu odabrati.
+	 * @return Odabran predmet.
+	 */
 	static Predmet odaberiPredmet(Scanner scanner, Predmet[] predmeti) {
 		for (int i = 0; i < predmeti.length; i++) {
 			System.out.printf("  %d. %s%n", i + 1, predmeti[i].getNaziv());
@@ -222,6 +280,12 @@ public class Glavna {
 		return predmeti[index];
 	}
 
+	/**
+	 * Pita korisnika za odabir jednog od danih studenata.
+	 * @param scanner Scanner s kojim se čita korisnikov odabir.
+	 * @param studenti Popis studenata koji se mogu odabrati.
+	 * @return Odabran student.
+	 */
 	static Student odaberiStudenta(Scanner scanner, Student[] studenti) {
 		for (int i = 0; i < studenti.length; i++) {
 			System.out.printf("  %d. %s %s%n", i + 1, studenti[i].getIme(), studenti[i].getPrezime());
@@ -233,6 +297,12 @@ public class Glavna {
 		return studenti[index];
 	}
 
+	/**
+	 * Pita korisnika za odabir barem jednog studenata.
+	 * @param scanner Scanner s kojim se čita korisnikov odabir.
+	 * @param sviStudenti Popis studenata koji se mogu odabrati.
+	 * @return Odabrani studenti.
+	 */
 	static Student[] odaberiUpisaneStudente(Scanner scanner, Student[] sviStudenti) {
 		for (int i = 0; i < sviStudenti.length; i++) {
 			System.out.printf("  %d. %s %s%n", i + 1, sviStudenti[i].getIme(), sviStudenti[i].getPrezime());

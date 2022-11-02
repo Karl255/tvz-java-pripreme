@@ -3,6 +3,9 @@ package hr.java.vjezbe.entitet;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Student na tercijarnoj obrazovnoj ustanovi.
+ */
 public class Student extends Osoba {
 	private String ime;
 	private String prezime;

@@ -1,5 +1,8 @@
 package hr.java.vjezbe.entitet;
 
+/**
+ * Bazna klasa za osobe.
+ */
 public abstract class Osoba {
 	private String ime;
 	private String prezime;

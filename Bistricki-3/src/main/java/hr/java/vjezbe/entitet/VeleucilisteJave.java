@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.HashSet;
 
+/**
+ * Visokoškolska obrazovna ustanova za Javu.
+ */
 public class VeleucilisteJave extends ObrazovnaUstanova implements Visokoskolska {
 	private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 	

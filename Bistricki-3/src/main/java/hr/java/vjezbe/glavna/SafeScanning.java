@@ -12,6 +12,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
+/**
+ * Pomoćne metode za siguran i garantiran upis točnih podataka.
+ */
 final class SafeScanning {
 	private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 

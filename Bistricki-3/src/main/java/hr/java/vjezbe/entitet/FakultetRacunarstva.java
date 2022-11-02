@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.HashSet;
 
+/**
+ * Diplomska obrazovna ustanova za računarstvo.
+ */
 public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski {
 	private static final Logger logger = LoggerFactory.getLogger(Glavna.class);
 	
@@ -26,7 +29,7 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 				.divide(new BigDecimal(5));
 		} catch (NemoguceOdreditiProsjekStudentaException e) {
 			Student s = ispiti[0].getStudent();
-			logger.warn("Student %s %s zbog negativne ocjene na jednom od ispita ima prosjek 'nedovoljan (1)'!", s.getIme(), s.getPrezime(), e);
+			logger.warn(String.format("Student %s %s zbog negativne ocjene na jednom od ispita ima prosjek 'nedovoljan (1)'!", s.getIme(), s.getPrezime()), e);
 			return BigDecimal.ONE;
 		}
 	}
@@ -54,7 +57,12 @@ public class FakultetRacunarstva extends ObrazovnaUstanova implements Diplomski 
 
 		return najboljiStudent;
 	}
-	
+
+	/**
+	 * Određuje broj izvrsnih ocjena (5) na ispitima. 
+	 * @param ispiti Ispiti iz kojih će se izvlačiti ocjene.
+	 * @return Količina izvrsnih ocjena (5). 
+	 */
 	private int odrediBrojIzvrsnihOcjena(Ispit[] ispiti) {
 		int count = 0;
 		
