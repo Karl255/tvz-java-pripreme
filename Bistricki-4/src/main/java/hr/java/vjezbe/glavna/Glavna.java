@@ -26,11 +26,14 @@ public class Glavna {
 	private static final Function<Integer, Predicate<Integer>> jeLiIspravanIndeksOd1 = count -> (i -> i >= 1 && i <= count);
 
 	/**
-	 * Početak programa.
+	 * Početak programa. Ako je dan jedan ili više argumenata prvi argument će se tretirati kao naziv datoteke čiji sadržaj će zmijeniti korisnikov unos. 
 	 * @param args Argumenti iz komandne linije.
 	 */
 	public static void main(String[] args) {
-		var scanner = new Scanner(System.in);
+		var scanner = args.length > 0
+			? new Scanner(new UserInputSimulator(args[0]))
+			: new Scanner(System.in);
+		
 		System.out.printf("Koliko obrazovnih ustanova želite unijeti? (najmanje %d) ", MIN_OBRAZOVNIH_USTANOVA);
 		int brojObrazovnihUstanova = SafeScanning.ensureNextInt(scanner, x -> x >= MIN_OBRAZOVNIH_USTANOVA);
 		List<ObrazovnaUstanova> obrazovneUstanove = new ArrayList<>();
