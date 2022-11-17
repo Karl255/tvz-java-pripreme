@@ -50,8 +50,6 @@ public class Glavna {
 
 			if (ustanova instanceof Visokoskolska visokoskolska) {
 				for (var s : ustanova.dobijSveStudenteKojiProlaze()) {
-					
-					
 					System.out.printf("Ocjene završnog rada koje je ostvario student %s %s:%n", s.getIme(), s.getPrezime());
 
 					System.out.print("  ocjena završnog rada (1-5): ");
