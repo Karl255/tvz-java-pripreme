@@ -46,8 +46,12 @@ public enum Ocjena {
 			default ->
 			{
 				String message = String.format("Nedozvoljena vrijednost za ocjenu: %d", ocjena);
-				throw new RuntimeException(message);
+				throw new NumberFormatException(message);
 			}
 		};
+	}
+	
+	public static Ocjena parseOcjena(String text) {
+		return parseOcjena(Integer.parseInt(text));
 	}
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 
-<MenuBar xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.java.vjezbe.glavna.IzbornikController">
+<MenuBar xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.java.vjezbe.glavna.controllers.IzbornikController">
     <menus>
         <Menu mnemonicParsing="false" text="Profesor">
             <items>
@@ -14,17 +14,17 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Student">
             <items>
-                <MenuItem mnemonicParsing="false" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguStudenata" text="Pretraga" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Predemt">
             <items>
-                <MenuItem mnemonicParsing="false" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguPredmeta" text="Pretraga" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Ispit">
             <items>
-                <MenuItem mnemonicParsing="false" text="Pretraga" />
+                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguIspita" text="Pretraga" />
             </items>
         </Menu>
     </menus>

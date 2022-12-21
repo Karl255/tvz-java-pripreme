@@ -5,8 +5,6 @@ package hr.java.vjezbe.entitet;
  */
 public class Profesor extends Osoba {
 	private String sifra;
-	private String ime;
-	private String prezime;
 	private String titula;
 
 	public Profesor(long id, String sifra, String ime, String prezime, String titula) {
@@ -29,6 +27,11 @@ public class Profesor extends Osoba {
 
 	public void setTitula(String titula) {
 		this.titula = titula;
+	}
+
+	@Override
+	public String toString() {
+		return titula + ' ' + ime + ' ' + prezime;
 	}
 
 	/**

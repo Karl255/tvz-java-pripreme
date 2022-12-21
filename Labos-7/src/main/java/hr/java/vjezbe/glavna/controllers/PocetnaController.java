@@ -1,4 +1,4 @@
-package hr.java.vjezbe.glavna;
+package hr.java.vjezbe.glavna.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

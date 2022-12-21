@@ -20,7 +20,7 @@ public final class Datoteke {
 	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d.M.yyyy.");
 	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("d.M.yyyy. H:mm");
 
-	public static List<Profesor> loadProfesori() {
+	static List<Profesor> loadProfesori() {
 		String filename = PROFESORI_FILE;
 		var profesori = new ArrayList<Profesor>();
 
@@ -44,7 +44,7 @@ public final class Datoteke {
 		return profesori;
 	}
 
-	public static List<Student> loadStudenti() {
+	static List<Student> loadStudenti() {
 		String filename = STUDENTI_FILE;
 		var studenti = new ArrayList<Student>();
 
@@ -68,7 +68,7 @@ public final class Datoteke {
 		return studenti;
 	}
 
-	public static List<Predmet> getPredmeti(List<Profesor> profesori, List<Student> sviStudenti) {
+	static List<Predmet> loadPredmeti(List<Profesor> profesori, List<Student> sviStudenti) {
 		String filename = PREDMETI_FILE;
 		var predmeti = new ArrayList<Predmet>();
 
@@ -98,7 +98,7 @@ public final class Datoteke {
 		return predmeti;
 	}
 
-	public static List<Ispit> getIspiti(List<Student> studenti, List<Predmet> predmeti) {
+	static List<Ispit> loadIspiti(List<Student> studenti, List<Predmet> predmeti) {
 		String filename = ISPITI_FILE;
 		var ispiti = new ArrayList<Ispit>();
 
@@ -130,7 +130,7 @@ public final class Datoteke {
 		return ispiti;
 	}
 
-	public static List<ObrazovnaUstanova> getObrazovnaUstanove(List<Profesor> sviProfesori, List<Predmet> sviPredmeti, List<Ispit> sviIspiti) {
+	static List<ObrazovnaUstanova> loadObrazovneUstanove(List<Profesor> sviProfesori, List<Predmet> sviPredmeti, List<Ispit> sviIspiti) {
 		String filename = OBRAZOVNE_USTANOVE_FILE;
 		var obrazovneUstanove = new ArrayList<ObrazovnaUstanova>();
 
