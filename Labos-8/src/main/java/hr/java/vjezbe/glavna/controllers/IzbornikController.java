@@ -10,8 +10,18 @@ public class IzbornikController {
 	}
 	
 	@FXML
+	public void otvoriUnosProfesora() {
+		VjezbeApplication.showWindow("views/profesor-unos-view.fxml");
+	}
+	
+	@FXML
 	public void otvoriPretraguStudenata() {
 		VjezbeApplication.showWindow("views/studenti-pretraga-view.fxml");
+	}
+	
+	@FXML
+	public void otvoriUnosStudenata() {
+		VjezbeApplication.showWindow("views/student-unos-view.fxml");
 	}
 	
 	@FXML
@@ -20,7 +30,17 @@ public class IzbornikController {
 	}
 	
 	@FXML
+	public void otvoriUnosPredmeta() {
+		VjezbeApplication.showWindow("views/predmet-unos-view.fxml");
+	}
+	
+	@FXML
 	public void otvoriPretraguIspita() {
 		VjezbeApplication.showWindow("views/ispiti-pretraga-view.fxml");
+	}
+	
+	@FXML
+	public void otvoriUnosIspita() {
+		VjezbeApplication.showWindow("views/ispit-unos-view.fxml");
 	}
 }

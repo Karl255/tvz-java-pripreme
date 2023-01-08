@@ -60,4 +60,9 @@ public class Predmet extends Entitet {
 	public void setStudenti(Set<Student> studenti) {
 		this.studenti = studenti;
 	}
+	
+	@Override
+	public String toString() {
+		return sifra + " " + naziv;
+	}
 }

@@ -6,29 +6,23 @@
 <?import javafx.scene.control.MenuItem?>
 
 <MenuBar xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.java.vjezbe.glavna.controllers.IzbornikController">
-    <menus>
-        <Menu mnemonicParsing="false" text="Profesor">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguProfesora" text="Pretraga" />
-            </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Student">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguStudenata" text="Pretraga" />
-            </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Predemt">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguPredmeta" text="Pretraga" />
-            </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Ispit">
-            <items>
-                <MenuItem mnemonicParsing="false" onAction="#otvoriPretraguIspita" text="Pretraga" />
-            </items>
-        </Menu>
-    </menus>
-    <padding>
-        <Insets />
-    </padding>
+	<Menu mnemonicParsing="false" text="Profesor">
+		<MenuItem mnemonicParsing="false" onAction="#otvoriPretraguProfesora" text="Pretraga"/>
+		<MenuItem mnemonicParsing="false" onAction="#otvoriUnosProfesora" text="Unos"/>
+	</Menu>
+	<Menu mnemonicParsing="false" text="Student">
+		<MenuItem mnemonicParsing="false" onAction="#otvoriPretraguStudenata" text="Pretraga"/>
+		<MenuItem mnemonicParsing="false" onAction="#otvoriUnosStudenata" text="Unos"/>
+	</Menu>
+	<Menu mnemonicParsing="false" text="Predemt">
+		<MenuItem mnemonicParsing="false" onAction="#otvoriPretraguPredmeta" text="Pretraga"/>
+		<MenuItem mnemonicParsing="false" onAction="#otvoriUnosPredmeta" text="Unos"/>
+	</Menu>
+	<Menu mnemonicParsing="false" text="Ispit">
+		<MenuItem mnemonicParsing="false" onAction="#otvoriPretraguIspita" text="Pretraga"/>
+		<MenuItem mnemonicParsing="false" onAction="#otvoriUnosIspita" text="Unos"/>
+	</Menu>
+	<style>
+		-fx-padding: 0;
+	</style>
 </MenuBar>

@@ -44,4 +44,13 @@ public class Student extends Osoba {
 	public int hashCode() {
 		return Objects.hash(ime, prezime, jmbag, datumRodjenja);
 	}
+	
+	@Override
+	public String toString() {
+		return "%s %s %s".formatted(
+			jmbag,
+			ime,
+			prezime
+		);
+	}
 }

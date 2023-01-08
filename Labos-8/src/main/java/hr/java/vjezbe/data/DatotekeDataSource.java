@@ -57,7 +57,7 @@ public final class DatotekeDataSource implements DataSource {
 				p.getIme(),
 				p.getPrezime(),
 				p.getTitula()
-			)).collect(Collectors.joining());
+			)).collect(Collectors.joining("\n"));
 
 		try {
 			Files.writeString(PROFESORI_FILE, out);
@@ -100,7 +100,7 @@ public final class DatotekeDataSource implements DataSource {
 				s.getPrezime(),
 				s.getJmbag(),
 				s.getDatumRodjenja().format(DATE_FORMAT)
-			)).collect(Collectors.joining());
+			)).collect(Collectors.joining("\n"));
 
 		try {
 			Files.writeString(STUDENTI_FILE, out);
@@ -138,13 +138,14 @@ public final class DatotekeDataSource implements DataSource {
 
 	private void writePredmeti(List<Predmet> predmeti) {
 		var out = predmeti.stream()
-			.map(p -> "%d;%s;%s;%d;%s".formatted(
+			.map(p -> "%d;%s;%s;%d;%d;%s".formatted(
 				p.getId(),
 				p.getSifra(),
 				p.getNaziv(),
+				p.getBrojEctsBodova(),
 				p.getNositelj().getId(),
 				p.getStudenti().stream().map(student -> String.valueOf(student.getId())).collect(Collectors.joining(" "))
-			)).collect(Collectors.joining());
+			)).collect(Collectors.joining("\n"));
 
 		try {
 			Files.writeString(PREDMETI_FILE, out);
@@ -191,7 +192,7 @@ public final class DatotekeDataSource implements DataSource {
 				i.getDatumIVrijeme().format(DATE_TIME_FORMAT),
 				i.getDvorana().zgrada(),
 				i.getDvorana().prostorija()
-			)).collect(Collectors.joining());
+			)).collect(Collectors.joining("\n"));
 
 		try {
 			Files.writeString(ISPITI_FILE, out);
@@ -243,7 +244,7 @@ public final class DatotekeDataSource implements DataSource {
 				u.getPredmeti().stream().map(predmet -> String.valueOf(predmet.getId())).collect(Collectors.joining(" ")),
 				u.getProfesori().stream().map(profesor -> String.valueOf(profesor.getId())).collect(Collectors.joining(" ")),
 				u.getIspiti().stream().map(ispit -> String.valueOf(ispit.getId())).collect(Collectors.joining(" "))
-			)).collect(Collectors.joining());
+			)).collect(Collectors.joining("\n"));
 
 		try {
 			Files.writeString(OBRAZOVNE_USTANOVE_FILE, s);
@@ -272,6 +273,7 @@ public final class DatotekeDataSource implements DataSource {
 	@Override
 	public void createProfesor(Profesor profesor) {
 		var profesori = new ArrayList<>(readProfesori());
+		profesor.setId(profesori.stream().mapToLong(Profesor::getId).max().orElse(0) + 1);
 		profesori.add(profesor);
 		
 		writeProfesori(profesori);
@@ -285,6 +287,7 @@ public final class DatotekeDataSource implements DataSource {
 	@Override
 	public void createStudent(Student student) {
 		var studenti = new ArrayList<>(readStudenti());
+		student.setId(studenti.stream().mapToLong(Student::getId).max().orElse(0) + 1);
 		studenti.add(student);
 
 		writeStudenti(studenti);
@@ -298,6 +301,7 @@ public final class DatotekeDataSource implements DataSource {
 	@Override
 	public void createPredmet(Predmet predmet) {
 		var predmeti = new ArrayList<>(readPredmeti());
+		predmet.setId(predmeti.stream().mapToLong(Predmet::getId).max().orElse(0) + 1);
 		predmeti.add(predmet);
 
 		writePredmeti(predmeti);
@@ -312,6 +316,7 @@ public final class DatotekeDataSource implements DataSource {
 	@Override
 	public void createIspit(Ispit ispit) {
 		var ispiti = new ArrayList<>(readIspiti());
+		ispit.setId(ispiti.stream().mapToLong(Ispit::getId).max().orElse(0) + 1);
 		ispiti.add(ispit);
 
 		writeIspiti(ispiti);
@@ -330,6 +335,7 @@ public final class DatotekeDataSource implements DataSource {
 	@Override
 	public void createObrazovnaUstanova(ObrazovnaUstanova ustanova) {
 		var ustanove = new ArrayList<>(readObrazovneUstanove());
+		ustanova.setId(ustanove.stream().mapToLong(ObrazovnaUstanova::getId).max().orElse(0) + 1);
 		ustanove.add(ustanova);
 
 		writeObrazovneUstanove(ustanove);
@@ -350,7 +356,7 @@ public final class DatotekeDataSource implements DataSource {
 		for (var id : ids) {
 			entities.stream().filter(e -> e.getId() == id).findFirst().ifPresent(values::add);
 		}
-
+		
 		return values;
 	}
 
