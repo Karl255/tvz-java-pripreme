@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>hr.java.vjezbe</groupId>
-    <artifactId>Labos-8</artifactId>
+    <artifactId>Priprema-7</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Labos-8</name>
+    <name>Priprema-7</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -65,7 +65,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>hr.java.vjezbe.labos7/hr.java.vjezbe.glavna.VjezbeApplication</mainClass>
+                            <mainClass>hr.java.vjezbe.priprema7/hr.java.vjezbe.glavna.VjezbeApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
