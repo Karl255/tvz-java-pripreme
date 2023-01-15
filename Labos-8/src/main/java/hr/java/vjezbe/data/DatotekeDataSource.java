@@ -2,7 +2,6 @@ package hr.java.vjezbe.data;
 
 import hr.java.vjezbe.entitet.*;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,11 +13,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public final class DatotekeDataSource implements DataSource {
-	private static final Path PROFESORI_FILE = Path.of("dat\\profesori.txt");
-	private static final Path STUDENTI_FILE = Path.of("dat\\studenti.txt");
-	private static final Path PREDMETI_FILE = Path.of("dat\\predmeti.txt");
-	private static final Path ISPITI_FILE = Path.of("dat\\ispiti.txt");
-	private static final Path OBRAZOVNE_USTANOVE_FILE = Path.of("dat\\obrazovneUstanove.txt");
+	private static final Path PROFESORI_FILE = Path.of("dat/profesori.txt");
+	private static final Path STUDENTI_FILE = Path.of("dat/studenti.txt");
+	private static final Path PREDMETI_FILE = Path.of("dat/predmeti.txt");
+	private static final Path ISPITI_FILE = Path.of("dat/ispiti.txt");
+	private static final Path OBRAZOVNE_USTANOVE_FILE = Path.of("dat/obrazovneUstanove.txt");
 
 	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d.M.yyyy.");
 	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("d.M.yyyy. H:mm");

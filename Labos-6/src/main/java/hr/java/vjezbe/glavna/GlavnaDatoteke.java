@@ -11,13 +11,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class GlavnaDatoteke {
-	private static final String PROFESORI_FILE = "dat\\profesori.txt";
-	private static final String STUDENTI_FILE = "dat\\studenti.txt";
-	private static final String PREDMETI_FILE = "dat\\predmeti.txt";
-	private static final String ISPITI_FILE = "dat\\ispiti.txt";
-	private static final String OBRAZOVNE_USTANOVE_FILE = "dat\\obrazovneUstanove.txt";
+	private static final String PROFESORI_FILE = "dat/profesori.txt";
+	private static final String STUDENTI_FILE = "dat/studenti.txt";
+	private static final String PREDMETI_FILE = "dat/predmeti.txt";
+	private static final String ISPITI_FILE = "dat/ispiti.txt";
+	private static final String OBRAZOVNE_USTANOVE_FILE = "dat/obrazovneUstanove.txt";
 	
-	private static final String SERIALIZED_OUTPUT_FILE = "dat\\obrazovne-ustanove.dat";
+	private static final String SERIALIZED_OUTPUT_FILE = "dat/obrazovne-ustanove.dat";
 
 	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d.M.yyyy.");
 	private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("d.M.yyyy. H:mm");
