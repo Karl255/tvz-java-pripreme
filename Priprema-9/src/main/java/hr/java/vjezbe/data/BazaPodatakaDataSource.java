@@ -4,17 +4,23 @@ import hr.java.vjezbe.entitet.*;
 import hr.java.vjezbe.iznimke.DataSourceException;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 
 public class BazaPodatakaDataSource implements DataSource, Closeable {
 	private final Connection connection;
 	
-	public BazaPodatakaDataSource() throws DataSourceException {
+	public BazaPodatakaDataSource(Properties prop) throws DataSourceException, IOException {
+		String dbUrl = prop.getProperty("url");
+		String dbUsername = prop.getProperty("username");
+		String dbPassoword = prop.getProperty("password");
+		
 		try {
-			connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/tvz-java-priprema", "tvz-java-priprema", "tvz-java-priprema");
+			connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassoword);
 		} catch (SQLException e) {
 			throw new DataSourceException(e);
 		}
