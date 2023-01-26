@@ -1,0 +1,7 @@
+1;P0001;Marija;Marić;dr.sc.
+2;P0002;Ivan;Cesarić;dr.
+3;P9901;Igor;Igorić;dr.
+4;P9902;Marko;Markić;dr.sc.
+5;P0003;Petar;Petrić;pred.
+6;P0023;Robert;Robić;v. pred.
+7;P0023;Marija;Marić;prof.
