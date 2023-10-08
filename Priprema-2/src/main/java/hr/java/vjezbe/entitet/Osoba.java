@@ -1,8 +1,8 @@
 package hr.java.vjezbe.entitet;
 
 public abstract class Osoba {
-	private String ime;
-	private String prezime;
+	protected String ime;
+	protected String prezime;
 
 	public Osoba(String ime, String prezime) {
 		this.ime = ime;

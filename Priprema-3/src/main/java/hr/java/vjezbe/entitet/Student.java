@@ -7,8 +7,6 @@ import java.util.Objects;
  * Student na tercijarnoj obrazovnoj ustanovi.
  */
 public class Student extends Osoba {
-	private String ime;
-	private String prezime;
 	private String jmbag;
 	private LocalDate datumRodjenja;
 

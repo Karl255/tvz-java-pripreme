@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Student extends Osoba {
-	private String ime;
-	private String prezime;
 	private String jmbag;
 	private LocalDate datumRodjenja;
 

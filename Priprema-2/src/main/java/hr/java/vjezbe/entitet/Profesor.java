@@ -2,8 +2,6 @@ package hr.java.vjezbe.entitet;
 
 public class Profesor extends Osoba {
 	private String sifra;
-	private String ime;
-	private String prezime;
 	private String titula;
 
 	private Profesor(String sifra, String ime, String prezime, String titula) {
